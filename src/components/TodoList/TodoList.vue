@@ -184,7 +184,7 @@
 
       <main class="container__main">
         <ul class="container__list">
-          <li v-for="todo in todosOptions" v-bind:key="todo" v-bind:todo="todo">
+          <li v-for="todo in filteredTodo" v-bind:key="todo" v-bind:todo="todo">
             <div class="container__item">
               <div class="container__checkbox">
                 <input
@@ -215,11 +215,9 @@
                     <h2>Todo Info</h2>
                   </div>
                   <ul>
-                    <!-- <i class="fas fa-tags" aria-hidden="true"></i>  -->
                     <li><i class="fas fa-calendar-alt" aria-hidden="true"></i>Deadline: {{ todo.date }} at {{ todo.time }}h</li>
                     <li><i class="fas fa-bell" aria-hidden="true"></i>Reminder: {{ todo.reminderTime }} min</li>
                     <li><i class="fas fa-clock" aria-hidden="true"></i>Do in: {{ todo.doTime }} min</li>
-                    <!-- <li>Tags: {{ todo.tags }}</li> -->
                   </ul>
                 </div>
               </div>
@@ -266,6 +264,8 @@
 import DatePicker from "vue-md-date-picker";
 import VueTagsInput from '@johmun/vue-tags-input';
 
+import { selectCategory } from '../../features/selectCategory'
+
 export default {
   name: "TodoList",
   data() {
@@ -292,8 +292,6 @@ export default {
       doTimeTodo: null,
       reminderTodo: null,
 
-      modifyAt: null,
-
       timeFormat: "HH:mm",
       timeStap: "60",
     };
@@ -313,18 +311,10 @@ export default {
   },
 
   computed: {
-    todosOptions() {
-      if (this.visibility === "all") {
-        return this.todos;
-      } else if (this.visibility === "active") {
-        return this.todos.filter((todo) => {
-          return !todo.isCompleted;
-        });
-      } else {
-        return this.todos.filter((todo) => {
-          return todo.isCompleted;
-        });
-      }
+    filteredTodo() {
+      const filteredTodo = selectCategory(this.todos, this.visibility)
+
+      return filteredTodo
     },
   },
 
