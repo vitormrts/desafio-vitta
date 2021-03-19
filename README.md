@@ -15,6 +15,9 @@ cd desafio-vitta
 # Install dependencies
 yarn
 
+# Optimize the app
+yarn build
+
 # Run the app (port 8080)
 yarn dev
 ```
