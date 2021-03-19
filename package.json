@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "desafio-vitta",
   "version": "1.0.0",
-  "description": "Front-end of aplication.",
+  "description": "Challenge for an internship at Vitta.",
   "author": "Vitor Martins Cruz <vitormartinscruz.dev@gmail.com>",
   "private": true,
   "scripts": {

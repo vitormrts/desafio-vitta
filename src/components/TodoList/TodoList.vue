@@ -265,6 +265,7 @@ import DatePicker from "vue-md-date-picker";
 import VueTagsInput from '@johmun/vue-tags-input';
 
 import { selectCategory } from '../../features/selectCategory'
+import { getMinDate } from '../../features/getMinDate'
 
 export default {
   name: "TodoList",
@@ -298,22 +299,14 @@ export default {
   },
 
   created() {
-    var today = new Date();
-
     this.todos = JSON.parse(localStorage.getItem("todo-storage") || "[]");
-    this.minDate =
-      "" +
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
+
+    this.minDate = getMinDate()
   },
 
   computed: {
     filteredTodo() {
       const filteredTodo = selectCategory(this.todos, this.visibility)
-
       return filteredTodo
     },
   },
